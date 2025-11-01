@@ -1,0 +1,410 @@
+/* --- Global Setup & CSS Variables --- */
+:root {
+    /* Dark Mode (Default) */
+    --bg-color: #0d0d1a;
+    --text-color: #e0e0e0;
+    --header-bg: rgba(13, 13, 26, 0.8);
+    --card-bg: rgba(26, 26, 41, 0.8);
+    --border-color: rgba(0, 255, 255, 0.3);
+    --neon-accent: #00ffff;
+    --neon-accent-2: #ff00ff;
+    --shadow-color: rgba(0, 255, 255, 0.2);
+    --transition-speed: 0.3s ease;
+}
+
+body.light-mode {
+    --bg-color: #e5e5e5;
+    --text-color: #1a1a1a;
+    --header-bg: rgba(255, 255, 255, 0.8);
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --border-color: rgba(0, 123, 255, 0.5);
+    --neon-accent: #007bff;
+    --neon-accent-2: #dc3545;
+    --shadow-color: rgba(0, 123, 255, 0.2);
+}
+
+/* --- Base & Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
+body {
+    font-family: "Space Mono", monospace;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: all var(--transition-speed);
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.pointer-events-none {
+    pointer-events: none;
+}
+
+.select-none {
+    user-select: none;
+}
+
+/* --- Animated Scanline Background --- */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.02) 1px,
+        transparent 1px
+    );
+    background-size: 100% 3px;
+    animation: scanline 10s linear infinite;
+    z-index: -10;
+    pointer-events: none;
+}
+@keyframes scanline {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 100px;
+    }
+}
+
+/* --- Utility Classes --- */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.section {
+    padding: 6rem 0;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--neon-accent);
+    text-shadow: 0 0 10px var(--neon-accent);
+}
+
+/* --- Header & Navigation --- */
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: var(--header-bg);
+    border-bottom: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--neon-accent);
+    text-decoration: none;
+    text-shadow: 0 0 5px var(--neon-accent);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+}
+.nav-item {
+    margin-left: 2rem;
+}
+.nav-link {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 700;
+    transition: all var(--transition-speed);
+}
+.nav-link:hover {
+    color: var(--neon-accent);
+    text-shadow: 0 0 10px var(--neon-accent);
+}
+
+.theme-toggle-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--neon-accent);
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+.theme-toggle-btn:hover {
+    box-shadow: 0 0 10px var(--neon-accent);
+}
+
+/* --- Hero Section & Particle Canvas --- */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 70px;
+}
+#particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: auto; /* Allow clicks */
+}
+.hero-content {
+    position: relative;
+    /* z-index: 2; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    z-index: 1; /* Stays above visually, but still allows canvas to get clicks if not covering it */
+    pointer-events: none; /* Prevent hero-content from blocking clicks on canvas */
+}
+.profile-image {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 3px solid var(--neon-accent);
+    box-shadow: 0 0 20px var(--shadow-color);
+}
+.subtitle {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+/* --- Glitch Text Animation --- */
+.glitch {
+    font-size: 3.5rem;
+    font-weight: 700;
+    position: relative;
+    color: var(--text-color);
+    animation: glitch 1.5s 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+}
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 var(--neon-accent-2);
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite
+        reverse;
+}
+.glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 var(--neon-accent);
+    clip: rect(86px, 450px, 140px, 0);
+    animation: glitch 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+}
+@keyframes glitch {
+    0% {
+        transform: skew(0deg);
+    }
+    5% {
+        transform: skew(0.5deg);
+    }
+    10% {
+        transform: skew(-0.5deg);
+    }
+    /* ... (add more steps) ... */
+    100% {
+        transform: skew(0deg);
+    }
+}
+
+/* --- Skills Section --- */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+}
+.skill-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    transition: all var(--transition-speed);
+}
+.skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px var(--shadow-color);
+    border-color: var(--neon-accent);
+}
+.skill-card i {
+    font-size: 3rem;
+    color: var(--neon-accent);
+    margin-bottom: 1rem;
+}
+
+/* --- Projects Section (3D Tilt Animation) --- */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    /* Set perspective for 3D effect */
+    perspective: 1000px;
+}
+.project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.25s ease;
+    /* This applies the 3D transform */
+    transform-style: preserve-3d;
+}
+.project-card:hover {
+    box-shadow: 0 10px 30px var(--shadow-color);
+    border-color: var(--neon-accent);
+}
+.project-card-inner {
+    padding: 2rem;
+    /* Move child in 3D space */
+    transform: translateZ(20px);
+}
+.project-card h3 {
+    color: var(--neon-accent);
+    margin-bottom: 1rem;
+}
+
+/* --- Button --- */
+.btn {
+    display: inline-block;
+    background: transparent;
+    color: var(--neon-accent);
+    border: 2px solid var(--neon-accent);
+    padding: 0.7rem 1.5rem;
+    margin-top: 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 700;
+    font-family: "Space Mono", monospace;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+.btn:hover {
+    background: var(--neon-accent);
+    color: var(--bg-color);
+    box-shadow: 0 0 20px var(--neon-accent);
+    animation: glow 1.5s ease-in-out infinite alternate;
+}
+@keyframes glow {
+    from {
+        box-shadow: 0 0 10px var(--neon-accent);
+    }
+    to {
+        box-shadow: 0 0 30px var(--neon-accent);
+    }
+}
+
+/* --- Contact Form --- */
+.contact-form {
+    max-width: 700px;
+    margin: 0 auto;
+}
+.form-group {
+    margin-bottom: 2rem;
+    position: relative;
+}
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    color: var(--text-color);
+    font-family: "Space Mono", monospace;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--neon-accent);
+    box-shadow: 0 0 10px var(--shadow-color);
+}
+.form-group label {
+    position: absolute;
+    top: -0.7rem;
+    left: 1rem;
+    background: var(--bg-color);
+    padding: 0 0.5rem;
+    color: var(--neon-accent);
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #555;
+    font-family: "Space Mono", monospace;
+}
+
+/* --- Footer --- */
+.footer {
+    text-align: center;
+    padding: 2rem 0;
+    border-top: 1px solid var(--border-color);
+    color: #888;
+}
+
+/* --- Scroll Animations --- */
+.fade-in {
+    animation: fadeIn 1s 0.5s ease-out forwards;
+    opacity: 0;
+}
+.fade-in-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.fade-in-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* --- Media Queries --- */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    } /* Simplify for demo */
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .glitch {
+        font-size: 2.5rem;
+    }
+}

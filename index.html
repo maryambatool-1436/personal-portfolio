@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Maryam Batool - Personal Portfolio</title>
+        <link rel="stylesheet" href="style.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
+    </head>
+    <body class="dark-mode">
+        <header class="header">
+            <nav class="navbar container">
+                <a href="#hero" class="nav-logo">MARYAM BATOOL_</a>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">/about</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#skills" class="nav-link">/skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#projects" class="nav-link">/projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link">/contact</a>
+                    </li>
+                </ul>
+                <button id="theme-toggle" class="theme-toggle-btn">
+                    <i class="fas fa-sun"></i>
+                </button>
+            </nav>
+        </header>
+
+        <main>
+            <section id="hero" class="hero-section">
+                <canvas id="particle-canvas"></canvas>
+
+                <div id="about" class="container hero-content">
+                    <div class="hero-text">
+                        <h1
+                            class="glitch select-none"
+                            data-text="HI, I'M MARYAM BATOOL_"
+                        >
+                            HI, I'M MARYAM BATOOL_
+                        </h1>
+                        <p class="subtitle fade-in select-none">
+                            I'm a developer who crafts digital experiences. I
+                            turn complex problems into clean, interactive
+                            designs.
+                        </p>
+                    </div>
+                    <!-- <img
+                        src="https://via.placeholder.com/300"
+                        alt="Profile"
+                        class="profile-image fade-in"
+                    /> -->
+                </div>
+            </section>
+
+            <section id="skills" class="section">
+                <div class="container">
+                    <h2 class="section-title fade-in-on-scroll">
+                        /SKILLS_MATRIX
+                    </h2>
+                    <div class="skills-grid fade-in-on-scroll">
+                        <div class="skill-card">
+                            <i class="fab fa-html5"></i>
+                            <span>HTML5</span>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fab fa-css3-alt"></i>
+                            <span>CSS3</span>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fab fa-js-square"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fab fa-react"></i>
+                            <span>React</span>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fab fa-node-js"></i>
+                            <span>Node.js</span>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fas fa-database"></i>
+                            <span>SQL/NoSQL</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects" class="section">
+                <div class="container">
+                    <h2 class="section-title fade-in-on-scroll">
+                        /PROJECT_ARCHIVE
+                    </h2>
+                    <div class="projects-grid fade-in-on-scroll">
+                        <div class="project-card">
+                            <div class="project-card-inner">
+                                <h3>Project Cyberspace</h3>
+                                <p>
+                                    A description of the project. Built with
+                                    future-tech.
+                                </p>
+                                <a href="#" class="btn">View Project</a>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-card-inner">
+                                <h3>Project Neon</h3>
+                                <p>
+                                    A responsive e-commerce front-end with a
+                                    neon aesthetic.
+                                </p>
+                                <a href="#" class="btn">View Project</a>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-card-inner">
+                                <h3>Project Glitch</h3>
+                                <p>
+                                    A UI/UX design case study for a streaming
+                                    service.
+                                </p>
+                                <a href="#" class="btn">View Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="section">
+                <div class="container">
+                    <h2 class="section-title fade-in-on-scroll">
+                        /ESTABLISH_CONNECTION
+                    </h2>
+                    <form class="contact-form fade-in-on-scroll">
+                        <div class="form-group">
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                required
+                                placeholder="[Your Callsign]"
+                            />
+                            <label for="name">Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                required
+                                placeholder="[Your Frequency]"
+                            />
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows="4"
+                                required
+                                placeholder="[Your Message Transmission]"
+                            ></textarea>
+                            <label for="message">Message</label>
+                        </div>
+                        <button type="submit" class="btn btn-submit">
+                            Send Transmission
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2025 Maryam Batool. All transmissions monitored.</p>
+        </footer>
+
+        <script src="script.js"></script>
+    </body>
+</html>
